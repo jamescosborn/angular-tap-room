@@ -22,11 +22,17 @@ import { Component } from '@angular/core';
     </form>
 
     <div class="beer-wrapper" *ngIf="selectedBeer">
-      <h2>{{selectedBeer.name}}<button (click)="editKeg()">Edit Keg</button></h2>
-      <h4>{{selectedBeer.brand}}<button (click)="editKeg()">Edit Keg</button></h4>
-      <p>\${{selectedBeer.price}} per pint<button (click)="editKeg()">Edit Keg</button></p>
-      <p>{{selectedBeer.alcoholContent}}%<button (click)="editKeg()">Edit Keg</button></p>
-      <p>{{selectedBeer.pintCount}}<button (click)="editKeg()">Edit Keg</button></p>
+      <h3>Edit Beer?</h3>
+      <label>Edit Beer Name:</label>
+      <input [(ngModel)]="selectedBeer.name">
+      <input [(ngModel)]="selectedBeer.brand">
+      <input [(ngModel)]="selectedBeer.price">
+      <input [(ngModel)]="selectedBeer.alcoholContent">
+      <h2>{{selectedBeer.name}}<button (click)="editKegAttribute(selectedBeer.name)">Edit Keg</button></h2>
+      <h4>{{selectedBeer.brand}}<button (click)="editKegAttribute()">Edit Keg</button></h4>
+      <p>\${{selectedBeer.price}} per pint<button (click)="editKegAttribute()">Edit Keg</button></p>
+      <p>{{selectedBeer.alcoholContent}}%<button (click)="editKegAttribute()">Edit Keg</button></p>
+      <p>{{selectedBeer.pintCount}}<button (click)="editKegAttribute()">Have a pint</button></p>
     </div>
   `
 })
@@ -38,9 +44,10 @@ export class AppComponent {
     new Beer("Total Domination", "Ninkasi", 7, 6.7),
     new Beer("Tricerahops", "Ninkasi", 5, 8)
   ];
+  selectedKeg: Beer = this.beers[0];
 
-  editKeg() {
-    alert("You've requested to edit a beer!");
+  editKegAttribute(clickedKegAttribute) {
+    this.selectedKeg = clickedKegAttribute;
   }
 
   newKeg(name, brand, price, alcoholContent) {
