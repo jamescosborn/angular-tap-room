@@ -44,7 +44,7 @@ import { Component } from '@angular/core';
     <button (click)="checkLowKegs()">Check to see what kegs are low</button>
     <div *ngIf="showLowKegs">
     <ul>
-      <li *ngFor="let lowKegs of lowKeg">{{lowKegs.name}}</li>
+      <li *ngFor="let lowKeg of lowKegs">{{lowKeg.name}}</li>
     </ul>
     </div>
   `
@@ -57,7 +57,7 @@ export class AppComponent {
     new Beer("Total Domination", "Ninkasi", 7, 6.7, false),
     new Beer("Tricerahops", "Ninkasi", 5, 8, false)
   ];
-  lowKeg: Beer[] = []
+  lowKegs: Beer[] = []
   selectedKeg: Beer = this.beers[0];
   showLowKegs: boolean = false;
   // editKegAttribute(clickedKegAttribute) {
@@ -75,14 +75,14 @@ export class AppComponent {
 
   checkLowKegs(){
     this.showLowKegs = !this.showLowKegs;
-    this.lowKegs();
+    this.getLowKegs();
   }
 
-  lowKegs() {
+  getLowKegs() {
     this.beers.forEach((beer) => {
       if (beer.pintCount < 151) {
         // alert("it works");
-        this.lowKeg.push(beer)
+        this.lowKegs.push(beer)
       }
 
     })
